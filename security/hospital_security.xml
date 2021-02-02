@@ -1,0 +1,9 @@
+<odoo>
+
+    <record id="grp_manager" model='res.groups'>
+        <field name = "name">Hospital Patient</field>
+<!--        <field name="category_id" ref="base.module_category_hidden"/>-->
+    </record>
+
+</odoo>
+

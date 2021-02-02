@@ -1,0 +1,71 @@
+<odoo>
+
+    <!--============================== appointment Information ==================================-->
+
+
+    <record id = "view_hospital_appointment_form" model="ir.ui.view">
+            <field name="name">view.hospital.appointment.form</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_selfenv" type="object" string="selfENV"/>
+                        <button name="btn_mapped" type="object" string="Mapped"/>
+                        <button name="btn_filtered" type="object" string="Filtered"/>
+                        <button name="btn_sorted" type="object" string="Sorted"/>
+                    </header>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+                                <field name="contact_no" attrs="{'required':[('email','!=',False)]}"/>
+                                <field name="email" widget="email"/>
+                                
+                            </group>
+                            <group>
+                                <field name="address"/>
+                                <field name="state"/>
+                                <field name="country"/>
+                            </group>
+                            <strong> Question or Query </strong><field name="other_details" placeholder="Text"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <!--===================== Tree View (Entered Data List of appointment) ======================-->
+
+    <record id = "view_hospital_appointment_tree" model="ir.ui.view">
+            <field name="name">view.hospital.appointment.tree</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="name"/>
+                        <field name="age"/>
+                        <field name="gender"/>
+                        <field name="contact_no" widget="phone"/>
+                        <field name="address"/>
+                        <field name="state"/>
+                        <field name="country"/>
+                    </tree>
+            </field>
+    </record>
+    
+    <!--============================= Action of Hospital appointment =================================-->
+
+    <record id = "action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">Appointment</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--================================= Menu Of Application ===================================-->
+
+<!--    <menuitem id="menu_hospital" name="Hospital Management"/>-->
+    <menuitem id="menu_appointment" name="Appointment" parent="menu_patient1" action="action_hospital_appointment"/>
+
+</odoo>

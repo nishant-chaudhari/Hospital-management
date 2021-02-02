@@ -1,0 +1,182 @@
+<odoo>
+
+    <!--============================== Patient Information ==================================-->
+
+
+    <record id = "view_hospital_patient_form" model="ir.ui.view">
+            <field name="name">view.hospital.patient.form</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <button name="%(action_hospital_bill)d" type="action" string="Make Bill"/>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+                                <field name="contact_no" attrs="{'required':[('email','!=',False)]}"/>
+                                <field name="email" widget="email"/>
+                                <field name="address"/>
+                                <field name="state"/>
+                                <field name="country"/>
+                            </group>
+                            <group>
+                                <field name="doctor_id" placeholder="-select-"/>
+                                <field name="room_id" placeholder="-select-"/>
+                                <field name="admit_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <!--===================== Tree View (Entered Data List of Patient) ======================-->
+
+    <record id = "view_hospital_patient_tree" model="ir.ui.view">
+            <field name="name">view.hospital.patient.tree</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="name"/>
+                        <field name="age"/>
+                        <field name="gender"/>
+                        <field name="contact_no" widget="phone"/>
+                        <field name="address"/>
+                        <field name="doctor_id"/>
+                        <field name="room_id"/>
+                        <field name="admit_date"/>
+                    </tree>
+            </field>
+    </record>
+
+    <!--=============================== Search View of Hospital Patient ===========================-->
+
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+       <field name="name">hospital.patient.search</field>
+       <field name="model">hospital.patient</field>
+       <field name="arch" type="xml">
+           <search string="Hospital Patient">
+               <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="contact_no"/>
+                <field name="address"/>
+                <field name="doctor_id"/>
+                <field name="room_id"/>
+
+               <group string="Group By">
+                   <filter name="group_by_doctor" string="Patient Under Doctor" context="{'group_by': 'doctor_id'}"/>
+                   <filter name="group_by_gender" string="Gender" context="{'group_by': 'gender'}"/>
+                   <filter name="group_by_room" string="Room" context="{'group_by': 'room_id'}"/>
+               </group>
+
+               <filter string="Position_like Male" name="position1" domain="[('gender','like','male')]"/>
+               <filter string="position_=like female" name="position2" domain="[('gender','=like','female')]"/>
+
+               <searchpanel>
+                   <field name="gender" string="Gender" icon="fa-mars"/>
+                   <field name="doctor_id" string="Patient Under Doctor" icon="fa-heart"/>
+               </searchpanel>
+
+           </search>
+       </field>
+</record>
+
+    <!--===================================== Kanban View ======================================-->
+
+   <record id="view_hospital_patient_kanban" model="ir.ui.view">
+       <field name="name">hospital.patient.kanban</field>
+       <field name="model">hospital.patient</field>
+       <field name="arch" type="xml">
+                <kanban class="view_hospital_patient_kanban">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="contact_no"/>
+                    <field name="age"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img alt="Avatar" t-att-src="kanban_image('hospital.patient', 'image',record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    </strong>
+                                <div t-if="record.contact_no.value">
+                                        <t t-esc="record.contact_no.value"/>
+                                </div>
+                                    <div t-if="record.age.value">
+                                        <t t-esc="record.age.value"/>
+                                </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+       </field>
+   </record>
+
+    <!--============================= Calendar view ===================================-->
+
+   <record id="view_hospital_patient_calender" model="ir.ui.view">
+       <field name="name">hospital.patient.calender</field>
+       <field name="model">hospital.patient</field>
+       <field name="arch" type="xml">
+               <calendar string='hospital_patient'
+                         date_start='admit_date'
+                         mode="month"
+                         event_open_popup="true"
+                         color="doctor_id">
+                   <field name="contact_no"/>
+                   <field name="age"/>
+                   <field name="gender"/>
+               </calendar>
+       </field>
+   </record>
+
+    <!--========================== Pivot View of Hospital Patient ===============================-->
+
+    <record id="view_hospital_patient_pivot" model="ir.ui.view">
+       <field name="name">hospital.patient.pivot</field>
+       <field name="model">hospital.patient</field>
+       <field name="arch" type="xml">
+            <pivot string="Patient">
+                <field name="name" type="row"/>
+                <field name="doctor_id" type="col"/>
+            </pivot>
+       </field>
+   </record>
+
+            <!--Graph View of Hospital Patient-->
+
+    <record id="view_hospital_patient_graph" model="ir.ui.view">
+       <field name="name">hospital.patient.graph</field>
+       <field name="model">hospital.patient</field>
+       <field name="arch" type="xml">
+            <graph string="Patient">
+                <field name="doctor_id" type="row"/>
+                <field name="name" type="col"/>
+            </graph>
+       </field>
+   </record>
+
+    <!--============================= Action of Hospital Patient =================================-->
+
+    <record id = "action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">patient</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
+    </record>
+
+    <!--================================= Menu Of Application ===================================-->
+
+    <menuitem id="menu_hospital" name="Hospital Management" />
+     <menuitem id="menu_patient1" name="Patients" parent="menu_hospital" sequence="1"/>
+    <menuitem id="menu_patient" name="Patients" parent="menu_patient1" action="action_hospital_patient"/>
+
+</odoo>

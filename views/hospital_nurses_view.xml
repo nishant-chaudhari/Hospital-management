@@ -1,0 +1,54 @@
+<odoo>
+
+            <!--    nurses Information -->
+
+
+    <record id = "view_hospital_nurses_form" model="ir.ui.view">
+            <field name="name">view.hospital.nurses.form</field>
+            <field name="model">hospital.nurses</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="contact_no"/>
+                            <field name="address"/>
+                            <field name="image" widget="image" style="height:200px;width:200px;"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+            <!--    Tree View (Entered Data List of nurses)-->
+
+    <record id = "view_hospital_nurses_tree" model="ir.ui.view">
+            <field name="name">view.hospital.nurses.tree</field>
+            <field name="model">hospital.nurses</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="name"/>
+                        <field name="age"/>
+                        <field name="gender"/>
+                        <field name="contact_no"/>
+                        <field name="address"/>
+<!--                        <field name="image" widget="image"/>-->
+                    </tree>
+            </field>
+    </record>
+
+            <!--Action of Hospital nurses-->
+
+    <record id = "action_hospital_nurses" model="ir.actions.act_window">
+        <field name="name">Nurses</field>
+        <field name="res_model">hospital.nurses</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+            <!--Menu Of Application-->
+    <menuitem id="menu_staff" name="Staff" parent="menu_hospital"/>
+    <menuitem id="menu_nurses" name="Nurses" parent="menu_staff" action="action_hospital_nurses"/>
+
+</odoo>

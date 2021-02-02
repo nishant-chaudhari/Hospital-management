@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_hospital_patient,access.hospital.patient,model_hospital_patient,grp_manager,1,1,1,1
+access_hospital_doctor,access.hospital.doctor,model_hospital_doctor,grp_manager,1,1,1,1
+access_hospital_room,access.hospital.room,model_hospital_room,grp_manager,1,1,1,1
+access_hospital_bill,access.hospital.bill,model_hospital_bill,grp_manager,1,1,1,1
+access_hospital_nurses,access.hospital.nurses,model_hospital_nurses,grp_manager,1,1,1,1
+access_hospital_otherstaff,access.hospital.otherstaff,model_hospital_otherstaff,grp_manager,1,1,1,1
+access_hospital_appointment,access.hospital.appointment,model_hospital_appointment,grp_manager,1,1,1,1

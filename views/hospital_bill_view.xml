@@ -1,0 +1,72 @@
+<odoo>
+
+            <!--    Bill Information -->
+
+
+    <record id = "view_hospital_bill_form" model="ir.ui.view">
+            <field name="name">view.hospital.bill.form</field>
+            <field name="model">hospital.bill</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_confirm" type="object" string="Confirm" states="cancel"/>
+                        <button name="btn_cancel" type="object" string="Cancel" states="confirmed"/>
+                        <field name="state" widget="statusbar" clickable="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="bill_no"/>
+                                <field name="bill_id"/>
+                                <field name="mob_no"/>
+                                <field name="address"/>
+
+                            </group>
+                            <group>
+                                <field name="dr_charge"/>
+                                <field name="room_charge"/>
+                                <field name="medicines"/>
+                                <field name="medicines_disc"/>
+                                <field name="medicines_total"/>
+                                <field name="total_bill"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+            <!--    Tree View (Entered Data List of Bill)-->
+
+    <record id = "view_hospital_bill_tree" model="ir.ui.view">
+            <field name="name">view.hospital.bill.tree</field>
+            <field name="model">hospital.bill</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="bill_no"/>
+                        <field name="bill_id"/>
+                        <field name="mob_no" />
+                        <field name="address"/>
+<!--                        <field name="name"/>-->
+                        <field name="dr_charge"/>
+                        <field name="room_charge"/>
+                        <field name="medicines"/>
+                        <field name="total_bill"/>
+                    </tree>
+            </field>
+    </record>
+
+            <!--Action of Hospital Bill-->
+
+    <record id = "action_hospital_bill" model="ir.actions.act_window">
+        <field name="name">Bill</field>
+        <field name="res_model">hospital.bill</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+            <!--Menu Of Application-->
+
+    <menuitem id="menu_bill" name="Bill" parent="menu_hospital" action="action_hospital_bill"/>
+
+</odoo>

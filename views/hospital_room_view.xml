@@ -1,0 +1,50 @@
+<odoo>
+
+            <!--    Room Information -->
+
+
+    <record id = "view_hospital_room_form" model="ir.ui.view">
+            <field name="name">view.hospital.room.form</field>
+            <field name="model">hospital.room</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="room_no"/>
+                            <field name="room_type"/>
+                            <field name="room_charge"/>
+                            <field name="available" widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+            <!--    Tree View (Entered Data List of Room)-->
+
+    <record id = "view_hospital_room_tree" model="ir.ui.view">
+            <field name="name">view.hospital.room.tree</field>
+            <field name="model">hospital.room</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="room_no"/>
+                        <field name="room_type"/>
+                        <field name="room_charge"/>
+                        <field name="available" widget="boolean_toggle"/>
+                    </tree>
+            </field>
+    </record>
+
+            <!--Action of Hospital Room-->
+
+    <record id = "action_hospital_room" model="ir.actions.act_window">
+        <field name="name">room</field>
+        <field name="res_model">hospital.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+            <!--Menu Of Application-->
+
+    <menuitem id="menu_room" name="Room" parent="menu_hospital" action="action_hospital_room" />
+
+</odoo>
